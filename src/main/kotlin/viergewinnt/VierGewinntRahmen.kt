@@ -9,6 +9,7 @@ class VierGewinntRahmen {
      * Zustände
      */
     var rahmen: Array<Array<Farbe?>> = Array(MAX_SPALTEN_ANZAHL) { Array(MAX_ZEILEN_ANZAHL) { null } }
+
     // Pair<out spalte: Int, out zeile: Int>
     var zuletztEingefuegtePosition: Pair<Int, Int>? = null
 
@@ -30,24 +31,24 @@ class VierGewinntRahmen {
         if (zuletztEingefuegtePosition != null) {
             var letzteSpalte = zuletztEingefuegtePosition?.first!!
             var letzteZeile = zuletztEingefuegtePosition?.second!!
-            var farbenInEinerSpalte = 0
+            var gleicheFarbenInEinerSpalte = 0
             var checkZeile: Int = letzteZeile
             while (checkZeile >= 0) {
-                if (farbenInEinerSpalte == 4) {
+                if (gleicheFarbenInEinerSpalte == 4) {
                     return true
                 }
                 if (rahmen[letzteSpalte][checkZeile] == null) {
                     return false
                 } else if (rahmen[letzteSpalte][checkZeile]!!.equals(letzteFarbe)) {
                     // increment counter
-                    ++farbenInEinerSpalte
+                    ++gleicheFarbenInEinerSpalte
                 } else if (!rahmen[letzteSpalte][checkZeile]!!.equals(letzteFarbe)) {
                     // wenn unter der eingeworfenen Farbe eine andere Farbe liegt, kann es kein VierGewinnt sein
                     return false
                 }
                 --checkZeile
             }
-            return farbenInEinerSpalte == 4
+            return gleicheFarbenInEinerSpalte == 4
         }
         return false
     }
@@ -60,8 +61,85 @@ class VierGewinntRahmen {
         if (zuletztEingefuegtePosition != null) {
             var zuletztEingefuegteFarbe: Farbe =
                 rahmen[zuletztEingefuegtePosition!!.first][zuletztEingefuegtePosition!!.second]!!
+            var gleicheFarbenInEinerSpalte = 0
 
+            // schaue unten links
+            var checkSpalte = zuletztEingefuegtePosition?.first!! - 1
+            var checkZeile = zuletztEingefuegtePosition?.second!! - 1
+            while (checkSpalte >= 0 && checkZeile >= 0) {
+                if (gleicheFarbenInEinerSpalte == 4) {
+                    return true
+                }
+                if (rahmen[checkSpalte][checkZeile] == null) {
+                    break
+                } else if (rahmen[checkSpalte][checkZeile]!!.equals(zuletztEingefuegteFarbe)) {
+                    // increment counter
+                    ++gleicheFarbenInEinerSpalte
+                    // go to next position
+                    --checkSpalte
+                    --checkZeile
+                } else if (!rahmen[checkSpalte][checkZeile]!!.equals(zuletztEingefuegteFarbe)) {
+                    break;
+                }
+            }
 
+            // schaue unten rechts
+            //reset gleicheFarbenInEinerSpalte
+            gleicheFarbenInEinerSpalte = 0
+            while (checkSpalte <= MAX_SPALTEN_ANZAHL && checkZeile >= 0) {
+                if (gleicheFarbenInEinerSpalte == 4) {
+                    return true
+                }
+                if (rahmen[checkSpalte][checkZeile] == null) {
+                    break
+                } else if (rahmen[checkSpalte][checkZeile]!!.equals(zuletztEingefuegteFarbe)) {
+                    // increment counter
+                    ++gleicheFarbenInEinerSpalte
+                    // go to next position
+                    ++checkSpalte
+                    --checkZeile
+                } else if (!rahmen[checkSpalte][checkZeile]!!.equals(zuletztEingefuegteFarbe)) {
+                    break;
+                }
+            }
+            // schaue oben links
+            //reset gleicheFarbenInEinerSpalte
+            gleicheFarbenInEinerSpalte = 0
+            while (checkSpalte <= MAX_SPALTEN_ANZAHL && checkZeile >= 0) {
+                if (gleicheFarbenInEinerSpalte == 4) {
+                    return true
+                }
+                if (rahmen[checkSpalte][checkZeile] == null) {
+                    break
+                } else if (rahmen[checkSpalte][checkZeile]!!.equals(zuletztEingefuegteFarbe)) {
+                    // increment counter
+                    ++gleicheFarbenInEinerSpalte
+                    // go to next position
+                    ++checkSpalte
+                    --checkZeile
+                } else if (!rahmen[checkSpalte][checkZeile]!!.equals(zuletztEingefuegteFarbe)) {
+                    break;
+                }
+            }
+            // schaue oben rechts
+            //reset gleicheFarbenInEinerSpalte
+            gleicheFarbenInEinerSpalte = 0
+            while (checkSpalte <= MAX_SPALTEN_ANZAHL && checkZeile <= MAX_ZEILEN_ANZAHL) {
+                if (gleicheFarbenInEinerSpalte == 4) {
+                    return true
+                }
+                if (rahmen[checkSpalte][checkZeile] == null) {
+                    break
+                } else if (rahmen[checkSpalte][checkZeile]!!.equals(zuletztEingefuegteFarbe)) {
+                    // increment counter
+                    ++gleicheFarbenInEinerSpalte
+                    // go to next position
+                    ++checkSpalte
+                    ++checkZeile
+                } else if (!rahmen[checkSpalte][checkZeile]!!.equals(zuletztEingefuegteFarbe)) {
+                    break;
+                }
+            }
         }
         return false
     }
