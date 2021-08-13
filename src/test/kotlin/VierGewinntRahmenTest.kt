@@ -61,6 +61,107 @@ class VierGewinntRahmenTest {
     }
 
     @Test
+    fun isVierDiagonal_nachObenLinks_returnTrue() {
+        // Arrange
+        var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+        /* 1 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+        /* 2 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.GELB)
+        /* 3 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.GELB)
+        /* 4 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+
+        // Act
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.GELB)
+
+        //Assert
+        assertTrue(vierGewinntRahmenUnderTest.isVierDiagonal())
+    }
+
+    @Test
+    fun isVierDiagonal_nachUntenRechts_returnTrue() {
+        // Arrange
+        var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+        /* 1 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.GELB)
+        /* 2 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.GELB)
+        /* 3 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.GELB)
+
+        /* 4 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.ROT)
+
+        // Act
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+
+        //Assert
+        assertTrue(vierGewinntRahmenUnderTest.isVierDiagonal())
+    }
+
+    @Test
+    fun isVierDiagonal_nachObenRechts_returnTrue() {
+        // Arrange
+        var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.GELB)
+
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.GELB)
+
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.GELB)
+
+        // Act
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+
+        //Assert
+        assertTrue(vierGewinntRahmenUnderTest.isVierDiagonal())
+    }
+
+    @Test
+    fun isVierDiagonal_nachUntenLinks_returnTrue() {
+        // Arrange
+        var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.GELB)
+
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.GELB)
+
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+
+        // Act
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.GELB)
+
+        //Assert
+        assertTrue(vierGewinntRahmenUnderTest.isVierDiagonal())
+    }
+
+
+    @Test
     fun isVierDiagonal_returnTrue() {
         // Arrange
         var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()

@@ -84,8 +84,11 @@ class VierGewinntRahmen {
             }
 
             // schaue unten rechts
-            //reset gleicheFarbenInEinerSpalte
+            // reset gleicheFarbenInEinerSpalte
             gleicheFarbenInEinerSpalte = 0
+            // reset Position
+            checkSpalte = zuletztEingefuegtePosition?.first!! - 1
+            checkZeile = zuletztEingefuegtePosition?.second!! - 1
             while (checkSpalte <= MAX_SPALTEN_ANZAHL && checkZeile >= 0) {
                 if (gleicheFarbenInEinerSpalte == 4) {
                     return true
@@ -105,6 +108,9 @@ class VierGewinntRahmen {
             // schaue oben links
             //reset gleicheFarbenInEinerSpalte
             gleicheFarbenInEinerSpalte = 0
+            // reset Position
+            checkSpalte = zuletztEingefuegtePosition?.first!! - 1
+            checkZeile = zuletztEingefuegtePosition?.second!! - 1
             while (checkSpalte <= MAX_SPALTEN_ANZAHL && checkZeile >= 0) {
                 if (gleicheFarbenInEinerSpalte == 4) {
                     return true
@@ -122,8 +128,11 @@ class VierGewinntRahmen {
                 }
             }
             // schaue oben rechts
-            //reset gleicheFarbenInEinerSpalte
+            // reset gleicheFarbenInEinerSpalte
             gleicheFarbenInEinerSpalte = 0
+            // reset Position
+            checkSpalte = zuletztEingefuegtePosition?.first!! - 1
+            checkZeile = zuletztEingefuegtePosition?.second!! - 1
             while (checkSpalte <= MAX_SPALTEN_ANZAHL && checkZeile <= MAX_ZEILEN_ANZAHL) {
                 if (gleicheFarbenInEinerSpalte == 4) {
                     return true
