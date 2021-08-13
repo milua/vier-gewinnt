@@ -1,6 +1,6 @@
 package viergewinnt
 
-enum class Spalte {
-    EINS
-
+enum class Spalte() {
+    EINS,
+    ZWEI
 }
