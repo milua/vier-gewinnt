@@ -8,7 +8,7 @@ import kotlin.test.assertTrue
 
 class VierGewinntRahmenTest {
     @Test
-    fun givenLeererRahmen_whenDreiGelbeSteineUebereinander_thenSpielUnentschieden() {
+    fun isVierSteineUebereinander_withDreiGelbeSteineUebereinander() {
         // Arrange
         var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
 
@@ -18,11 +18,11 @@ class VierGewinntRahmenTest {
         vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
 
         // Assert
-        assertFalse(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Spalte.EINS))
+        assertFalse(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Farbe.GELB))
     }
 
     @Test
-    fun givenLeererRahmen_whenVierGelbeSteineUebereinander() {
+    fun isVierSteineUebereinander_withVierGelbeSteineUebereinander() {
         // Arrange
         var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
         vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
@@ -33,7 +33,31 @@ class VierGewinntRahmenTest {
         vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
 
         // Assert
-        assertTrue(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Spalte.EINS))
+        assertTrue(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Farbe.GELB))
+    }
+
+    @Test
+    fun isVierSteineUebereinander_withLeererRahmen() {
+        // Arrange
+        var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+
+        // Assert
+        assertFalse(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Farbe.GELB))
+    }
+
+
+    @Test
+    fun isVierSteineUebereinander_withAndereFarbeDarunter() {
+        // Arrange
+        var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+
+        // Assert
+        assertFalse(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Farbe.GELB))
     }
 
     @Test
@@ -58,7 +82,7 @@ class VierGewinntRahmenTest {
         vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.GELB)
 
         //Assert
-        assertTrue(vierGewinntRahmenUnderTest.isVierDiagonal(Spalte.VIER))
+        assertTrue(vierGewinntRahmenUnderTest.isVierDiagonal())
     }
 
     @Test

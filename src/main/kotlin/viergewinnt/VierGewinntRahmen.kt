@@ -9,6 +9,7 @@ class VierGewinntRahmen {
      * Zustände
      */
     var rahmen: Array<Array<Farbe?>> = Array(MAX_SPALTEN_ANZAHL) { Array(MAX_ZEILEN_ANZAHL) { null } }
+    // Pair<out spalte: Int, out zeile: Int>
     var zuletztEingefuegtePosition: Pair<Int, Int>? = null
 
     fun einsetzen(spalte: Spalte, farbe: Farbe) {
@@ -25,16 +26,28 @@ class VierGewinntRahmen {
         }
     }
 
-    fun isVierSteineUebereinander(spalte: Spalte): Boolean {
-        var farbenInEinerSpalte = 0
-        for (zeile in 0 until MAX_ZEILEN_ANZAHL) {
-            if (farbenInEinerSpalte == 4) {
-                return true
+    fun isVierSteineUebereinander(letzteFarbe: Farbe): Boolean {
+        if (zuletztEingefuegtePosition != null) {
+            var letzteSpalte = zuletztEingefuegtePosition?.first!!
+            var letzteZeile = zuletztEingefuegtePosition?.second!!
+            var farbenInEinerSpalte = 0
+            var checkZeile: Int = letzteZeile
+            while (checkZeile >= 0) {
+                if (farbenInEinerSpalte == 4) {
+                    return true
+                }
+                if (rahmen[letzteSpalte][checkZeile] == null) {
+                    return false
+                } else if (rahmen[letzteSpalte][checkZeile]!!.equals(letzteFarbe)) {
+                    // increment counter
+                    ++farbenInEinerSpalte
+                } else if (!rahmen[letzteSpalte][checkZeile]!!.equals(letzteFarbe)) {
+                    // wenn unter der eingeworfenen Farbe eine andere Farbe liegt, kann es kein VierGewinnt sein
+                    return false
+                }
+                --checkZeile
             }
-            if (rahmen[spalte.ordinal][zeile] == null) {
-                return false
-            }
-            ++farbenInEinerSpalte
+            return farbenInEinerSpalte == 4
         }
         return false
     }
@@ -43,7 +56,13 @@ class VierGewinntRahmen {
         return rahmen[spalte.ordinal][MAX_ZEILEN_ANZAHL - 1] != null
     }
 
-    fun isVierDiagonal(vier: Spalte): Boolean {
+    fun isVierDiagonal(): Boolean {
+        if (zuletztEingefuegtePosition != null) {
+            var zuletztEingefuegteFarbe: Farbe =
+                rahmen[zuletztEingefuegtePosition!!.first][zuletztEingefuegtePosition!!.second]!!
+
+
+        }
         return false
     }
 }
