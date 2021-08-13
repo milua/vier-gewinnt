@@ -26,40 +26,43 @@ val boxSize = 100.dp;
 fun main() = Window {
     var text by remember { mutableStateOf("Hello, World!") }
     val rahmen = VierGewinntRahmen()
+    val emptyArray: Array<Farbe?> = arrayOf(null, null, null, null, null, null)
+    val notEmptyArray: Array<Farbe?> = arrayOf(Farbe.GELB, null, null, null, null, null)
+
+    var spalte1 by remember { mutableStateOf(emptyArray)}
+    var spalte2 by remember { mutableStateOf(emptyArray)}
+    var spalte3 by remember { mutableStateOf(emptyArray)}
+    var spalte4 by remember { mutableStateOf(emptyArray)}
+    var spalte5 by remember { mutableStateOf(emptyArray)}
+    var spalte6 by remember { mutableStateOf(emptyArray)}
+    var spalte7 by remember { mutableStateOf(emptyArray)}
+
 
     MaterialTheme {
         Row (modifier = Modifier.border(
             width = 2.dp, brush = SolidColor(Color.DarkGray), shape = RectangleShape
         )) {
-            spaltenView()
-            spaltenView()
-            spaltenView()
-            spaltenView()
-            spaltenView()
-            spaltenView()
-            spaltenView()
+            spaltenView(spalte1, {spalte1 = notEmptyArray})
+            spaltenView(spalte2, {spalte2 = notEmptyArray})
+            spaltenView(spalte3, {spalte3 = notEmptyArray})
+            spaltenView(spalte4, {spalte4 = notEmptyArray})
+            spaltenView(spalte5, {spalte5 = notEmptyArray})
+            spaltenView(spalte6, {spalte6 = notEmptyArray})
+            spaltenView(spalte7, {spalte7 = notEmptyArray})
         }
     }
 }
 
 @Composable
-fun spaltenView () {
-    val emptyArray: Array<Farbe?> = arrayOf(null, null, null, null, null, null)
-    val notEmptyArray: Array<Farbe?> = arrayOf(Farbe.GELB, null, null, null, null, null)
-    var color by remember { mutableStateOf(Color.Transparent) }
-    var spalte by remember { mutableStateOf(emptyArray)}
-    //var count by model.spalte.observeAsState()
-    Column (modifier = Modifier.clickable { run{
-        color = Color.Yellow
-        spalte = notEmptyArray
-    } }.border(
+fun spaltenView (spalte: Array<Farbe?>, clickHandler: () -> Unit) {
+    Column (modifier = Modifier.clickable {clickHandler}.border(
         width = 2.dp, brush = SolidColor(Color.DarkGray), shape = RectangleShape
     )) {
-        Box(modifier = Modifier.size(boxSize).background(Color.Transparent))
-        Box(modifier = Modifier.size(boxSize).background(Color.Transparent))
-        Box(modifier = Modifier.size(boxSize).background(Color.Transparent))
-        Box(modifier = Modifier.size(boxSize).background(Color.Transparent))
-        Box(modifier = Modifier.size(boxSize).background(Color.Transparent))
+        Box(modifier = Modifier.size(boxSize).background(convertFarbeToColor(spalte[5])))
+        Box(modifier = Modifier.size(boxSize).background(convertFarbeToColor(spalte[4])))
+        Box(modifier = Modifier.size(boxSize).background(convertFarbeToColor(spalte[3])))
+        Box(modifier = Modifier.size(boxSize).background(convertFarbeToColor(spalte[2])))
+        Box(modifier = Modifier.size(boxSize).background(convertFarbeToColor(spalte[1])))
         Box(modifier = Modifier.size(boxSize).background(convertFarbeToColor(spalte[0])))
     }
 }
