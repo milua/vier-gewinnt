@@ -9,6 +9,7 @@ class VierGewinntRahmen {
      * Zustände
      */
     var rahmen: Array<Array<Farbe?>> = Array(MAX_SPALTEN_ANZAHL) { Array(MAX_ZEILEN_ANZAHL) { null } }
+    var zuletztEingefuegtePosition: Pair<Int, Int>? = null
 
     fun einsetzen(spalte: Spalte, farbe: Farbe) {
 
@@ -18,6 +19,7 @@ class VierGewinntRahmen {
         for (zeile in 0 until MAX_ZEILEN_ANZAHL) {
             if (rahmen[spalte.ordinal][zeile] == null) {
                 rahmen[spalte.ordinal][zeile] = farbe
+                zuletztEingefuegtePosition = Pair(spalte.ordinal, zeile)
                 return
             }
         }
