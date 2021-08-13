@@ -152,4 +152,46 @@ class VierGewinntRahmen {
         }
         return false
     }
+
+    /**
+     * Diese Methode prüft von der letzten Einwurfposition nach rechts und nach links,
+     * ob in Summe 4 gleichfarbige Coins in einer Reihe eingesetzt wurden.
+     */
+    fun isVierSteineDerSelbenFarbeNebeneinander(spalte: Spalte, zeile: Int, farbe: Farbe): Boolean {
+        val eingangsFarbe: Farbe? = rahmen[spalte.ordinal][zeile]
+        var vorherigeFarbe: Farbe? = rahmen[spalte.ordinal][zeile]
+        var aktuelleFarbe: Farbe? = rahmen[spalte.ordinal][zeile]
+        var vierGewinntCounter = 1 // 1 = Der Coin den man gerade einsetzt
+
+        // check nach rechts
+        for (naechsteSpalte in spalte.ordinal + 1 until MAX_SPALTEN_ANZAHL) {
+            aktuelleFarbe = rahmen[naechsteSpalte][zeile]
+
+            if (aktuelleFarbe == vorherigeFarbe) {
+                vierGewinntCounter++
+                if (vierGewinntCounter == 4) {
+                    return true
+                }
+            } else {
+                break
+            }
+            vorherigeFarbe = aktuelleFarbe
+        }
+        vorherigeFarbe = eingangsFarbe
+        // check nach links
+        for (vorherigeSpalte in spalte.ordinal - 1 downTo 0) {
+            aktuelleFarbe = rahmen[vorherigeSpalte][zeile]
+            if (aktuelleFarbe == vorherigeFarbe) {
+                vierGewinntCounter++
+                println(vierGewinntCounter)
+                if (vierGewinntCounter == 4) {
+                    return true
+                }
+            } else {
+                break
+            }
+            vorherigeFarbe = aktuelleFarbe
+        }
+        return false
+    }
 }
