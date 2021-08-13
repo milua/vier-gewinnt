@@ -18,7 +18,7 @@ class VierGewinntRahmenTest {
         vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
 
         // Assert
-        assertFalse(vierGewinntRahmenUnderTest.isVierSteineUebereinander())
+        assertFalse(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Spalte.EINS))
     }
 
     @Test
@@ -33,7 +33,7 @@ class VierGewinntRahmenTest {
         vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
 
         // Assert
-        assertTrue(vierGewinntRahmenUnderTest.isVierSteineUebereinander())
+        assertTrue(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Spalte.EINS))
     }
 
     @Test
