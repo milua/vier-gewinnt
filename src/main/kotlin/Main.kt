@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
 import viergewinnt.Farbe
+import viergewinnt.Spalte
 import viergewinnt.VierGewinntRahmen
 
 val boxSize = 100.dp;
@@ -29,6 +30,8 @@ fun main() = Window {
     val emptyArray: Array<Farbe?> = arrayOf(null, null, null, null, null, null)
     val notEmptyArray: Array<Farbe?> = arrayOf(Farbe.GELB, null, null, null, null, null)
 
+    var aktiveFarbe by remember { mutableStateOf(Farbe.GELB) }
+
     var spalte1 by remember { mutableStateOf(emptyArray)}
     var spalte2 by remember { mutableStateOf(emptyArray)}
     var spalte3 by remember { mutableStateOf(emptyArray)}
@@ -36,19 +39,24 @@ fun main() = Window {
     var spalte5 by remember { mutableStateOf(emptyArray)}
     var spalte6 by remember { mutableStateOf(emptyArray)}
     var spalte7 by remember { mutableStateOf(emptyArray)}
+    
 
+    fun einsetzen (spalte: Spalte) {
+        rahmen.einsetzen(spalte, aktiveFarbe)
+        aktiveFarbe = if (aktiveFarbe == Farbe.GELB)  Farbe.ROT else Farbe.GELB
+    }
 
     MaterialTheme {
         Row (modifier = Modifier.border(
             width = 2.dp, brush = SolidColor(Color.DarkGray), shape = RectangleShape
         )) {
-            spaltenView(spalte1, {spalte1 = notEmptyArray})
-            spaltenView(spalte2, {spalte2 = notEmptyArray})
-            spaltenView(spalte3, {spalte3 = notEmptyArray})
-            spaltenView(spalte4, {spalte4 = notEmptyArray})
-            spaltenView(spalte5, {spalte5 = notEmptyArray})
-            spaltenView(spalte6, {spalte6 = notEmptyArray})
-            spaltenView(spalte7, {spalte7 = notEmptyArray})
+            spaltenView(spalte1, {einsetzen(Spalte.EINS); spalte1 = rahmen.rahmen[0].clone()})
+            spaltenView(spalte2, {einsetzen(Spalte.ZWEI); spalte2 = rahmen.rahmen[1].clone()})
+            spaltenView(spalte3, {einsetzen(Spalte.DREI); spalte3 = rahmen.rahmen[2].clone()})
+            spaltenView(spalte4, {einsetzen(Spalte.VIER); spalte4 = rahmen.rahmen[3].clone()})
+            spaltenView(spalte5, {einsetzen(Spalte.FUENF); spalte5 = rahmen.rahmen[4].clone()})
+            spaltenView(spalte6, {einsetzen(Spalte.SECHS); spalte6 = rahmen.rahmen[5].clone()})
+            spaltenView(spalte7, {einsetzen(Spalte.SIEBEN); spalte7 = rahmen.rahmen[6].clone()})
         }
     }
 }
