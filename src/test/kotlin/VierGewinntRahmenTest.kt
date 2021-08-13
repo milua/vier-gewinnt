@@ -156,4 +156,24 @@ class VierGewinntRahmenTest {
         // Assert
         assertTrue(gefuellt);
     }
+
+    @Test
+    fun isVierSteineDerSelbenFarbeNebeneinander_whenVierSteineDerSelbenFarbeNebeneinander_thenReturnTrue(){
+        // Arrange
+        var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+        // füllt Spalte voll
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.FUENF, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.SECHS, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.SIEBEN, Farbe.GELB)
+
+        // Act
+        val gefuellt = vierGewinntRahmenUnderTest.isVierSteineDerSelbenFarbeNebeneinander(Spalte.ZWEI, 0, Farbe.GELB)
+
+        // Assert
+        assertTrue(gefuellt);
+    }
 }
