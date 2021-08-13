@@ -1,5 +1,5 @@
-import viergewinnt.Spalte
 import viergewinnt.Farbe
+import viergewinnt.Spalte
 import viergewinnt.VierGewinntRahmen
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -18,26 +18,63 @@ class VierGewinntRahmenTest {
         vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
 
         // Assert
-        assertFalse(vierGewinntRahmenUnderTest.isVierSteineUebereinander())
+        assertFalse(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Spalte.EINS))
     }
 
     @Test
     fun givenLeererRahmen_whenVierGelbeSteineUebereinander() {
         // Arrange
         var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
 
-        // Act
-        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
-        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
-        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+        //Act
         vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
 
         // Assert
-        assertTrue(vierGewinntRahmenUnderTest.isVierSteineUebereinander())
+        assertTrue(vierGewinntRahmenUnderTest.isVierSteineUebereinander(Spalte.EINS))
     }
 
     @Test
-    fun einsetzen_whenEinsetzenInSpalte_thenFarbeIstInRahmen(){
+    fun isVierDiagonal_returnTrue() {
+        // Arrange
+        var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+        /* 1 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.GELB)
+        /* 2 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.ZWEI, Farbe.GELB)
+        /* 3 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.DREI, Farbe.GELB)
+        /* 4 */
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.ROT)
+
+        // Act
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.GELB)
+
+        //Assert
+        assertTrue(vierGewinntRahmenUnderTest.isVierDiagonal(Spalte.VIER))
+    }
+
+    @Test
+    fun setZuletztEingefuegtePositionCorrectly() {
+        // Arrange
+        var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
+
+        // Act
+        vierGewinntRahmenUnderTest.einsetzen(Spalte.VIER, Farbe.GELB)
+
+        // Assert
+        assertEquals(vierGewinntRahmenUnderTest.zuletztEingefuegtePosition, Pair(3, 0))
+    }
+
+    @Test
+    fun einsetzen_whenEinsetzenInSpalte_thenFarbeIstInRahmen() {
         // Arrange
         var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
 
@@ -49,7 +86,7 @@ class VierGewinntRahmenTest {
     }
 
     @Test
-    fun isSpalteGefuellt_whenLeereSpalte_thenReturnTrue(){
+    fun isSpalteGefuellt_whenLeereSpalte_thenReturnTrue() {
         // Arrange
         var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
 
@@ -61,7 +98,7 @@ class VierGewinntRahmenTest {
     }
 
     @Test
-    fun isSpalteGefuellt_whenSpalteFastGefuellt_thenReturnTrue(){
+    fun isSpalteGefuellt_whenSpalteFastGefuellt_thenReturnTrue() {
         // Arrange
         var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
         vierGewinntRahmenUnderTest.einsetzen(Spalte.EINS, Farbe.ROT)
@@ -78,7 +115,7 @@ class VierGewinntRahmenTest {
     }
 
     @Test
-    fun whenEinsetzenBereitsGefuellteSpalte_thenReturnTrue(){
+    fun whenEinsetzenBereitsGefuellteSpalte_thenReturnTrue() {
         // Arrange
         var vierGewinntRahmenUnderTest: VierGewinntRahmen = VierGewinntRahmen()
         // füllt Spalte voll
