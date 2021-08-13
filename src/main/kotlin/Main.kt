@@ -55,7 +55,7 @@ fun main() = Window {
 
 @Composable
 fun spaltenView (spalte: Array<Farbe?>, clickHandler: () -> Unit) {
-    Column (modifier = Modifier.clickable {clickHandler}.border(
+    Column (modifier = Modifier.clickable {run{clickHandler()}}.border(
         width = 2.dp, brush = SolidColor(Color.DarkGray), shape = RectangleShape
     )) {
         Box(modifier = Modifier.size(boxSize).background(convertFarbeToColor(spalte[5])))
