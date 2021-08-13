@@ -40,4 +40,8 @@ class VierGewinntRahmen {
     fun isSpalteGefuellt(spalte: Spalte): Boolean {
         return rahmen[spalte.ordinal][MAX_ZEILEN_ANZAHL - 1] != null
     }
+
+    fun isVierDiagonal(vier: Spalte): Boolean {
+        return false
+    }
 }
